@@ -1,0 +1,34 @@
+<html>
+<body>
+<a href="/">All</a>
+<a href="/?category=furniture">Furniture</a>
+<a href="/?category=alcohol">Alcohol</a>
+<a href="/?category=toiletries">Toiletries</a>
+<a href="/?category=shoes">Shoes</a>
+<a href="/?category=food">Food</a>
+<a href="/?category=jewelry">Jewelry</a>
+<table style="width:100%" border="1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Category</th>
+        <th>Credit Card</th>
+        <th>CVV</th>
+        <th>Date</th>
+    </tr>
+    {{#purchases}}
+    <tr>
+        {{#customer}}
+        <td>{{name}}</td>
+        {{/customer}}
+        <td>{{customer.email}}</td>
+        <td>{{category}}</td>
+        <td>{{creditCard}}</td>
+        <td>{{cvv}}</td>
+        <td>{{Date}}</td>
+    </tr>
+    {{/purchases}}
+</table>
+</ul>
+</body>
+</html>
