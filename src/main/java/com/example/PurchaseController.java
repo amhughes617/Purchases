@@ -1,6 +1,8 @@
 package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,12 +48,22 @@ public class PurchaseController {
         }
     }
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home(Model model, String category) {
+    public String home(Model model, String category, Integer page) {
+        page = (page == null) ? 0 : page;
+        Page<Purchase> p;
+        PageRequest pr = new PageRequest(page, 5);
         if (category != null) {
-            model.addAttribute("purchases", purchases.findByCategoryIgnoreCase(category));
+            p = purchases.findByCategoryIgnoreCase(pr, category);
+            model.addAttribute("purchases", p);
         }
         else {
-            model.addAttribute("purchases", purchases.findAll());
+            p = purchases.findAll(pr);
+            model.addAttribute("purchases", p);
+            model.addAttribute("nextPage", page+1);
+            model.addAttribute("showNext", p.hasNext());
+            model.addAttribute("showPrevious", p.hasPrevious());
+            model.addAttribute("previousPage", page-1);
+            model.addAttribute("category", category);
         }
         return "home";
     }

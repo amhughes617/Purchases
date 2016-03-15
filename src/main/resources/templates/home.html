@@ -29,6 +29,13 @@
     </tr>
     {{/purchases}}
 </table>
+{{#showPrevious}}
+<a href="/?page={{nextPage}}">Previous</a>
+{{/showPrevious}}
+
+{{#showNext}}
+<a href="/?page={{nextPage}}{{#category}}&category={{.}}{{/category}}">Next</a>
+{{/showNext}}
 </ul>
 </body>
 </html>
